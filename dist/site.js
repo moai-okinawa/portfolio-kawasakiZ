@@ -22,10 +22,10 @@ dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();
 });
 
-const sectionLinks = Array.from(document.querySelectorAll("nav a"), (link) => ({
+const sectionLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'), (link) => ({
   link,
-  section: document.querySelector(link.hash),
-}));
+  section: document.getElementById(link.hash.slice(1)),
+})).filter(({ section }) => section);
 
 function markCurrentSection() {
   const active = sectionLinks.filter(({ section }) => section.getBoundingClientRect().top <= window.innerHeight / 3).pop() ?? sectionLinks[0];

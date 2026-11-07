@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf7ee">
+  <meta name="description" content="「サンダルの川崎」の写真帳、足跡。散歩の途中でふと足が止まる、町の風景を集めています。">
+  <title>足跡｜サンダルの川崎の写真帳</title>
+  <link rel="icon" href="../assets/mark.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="album.css">
+  <script defer src="album.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="masthead" id="top">
+    <div class="wrap masthead-inner">
+      <a class="brand" href="../index.html">
+        <img src="../assets/mark.png" width="41" height="41" alt="">
+        <span>サンダルの川崎</span>
+      </a>
+      <nav aria-label="メインメニュー">
+        <a href="../index.html#profile">自己紹介</a>
+        <a href="../index.html#activities">やっていること</a>
+        <a href="../index.html#works">作ったもの</a>
+        <a href="#main" aria-current="page">足跡</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap album">
+    <header class="album-intro">
+      <div>
+        <p class="kicker" lang="en">PHOTO JOURNAL</p>
+        <h1><span class="underprint">足跡</span></h1>
+      </div>
+      <p class="album-description">散歩の途中で、ふと足が止まる。<br>そんな町の風景を集める写真帳です。</p>
+    </header>
+    <div class="photo-grid">
+      <!-- added-photos:start -->
+      <!-- added-photos:end -->
+      <figure class="journal-photo">
+        <a class="photo-link" href="photos/alley.webp" aria-label="午後の路地を大きく見る">
+          <img src="photos/alley.webp" alt="午後の光が差す細い路地に、鉢植えと自転車が並ぶ">
+        </a>
+        <figcaption>
+          <h2>午後の路地</h2>
+          <p>通りを一本それると、日なたと日陰のあいだに細い道が続いている。</p>
+          <small>AI生成のサンプル</small>
+        </figcaption>
+      </figure>
+      <figure class="journal-photo">
+        <a class="photo-link" href="photos/pots.webp" aria-label="軒先の植木鉢を大きく見る">
+          <img src="photos/pots.webp" alt="壁沿いに並ぶ素焼きの植木鉢と緑の葉" loading="lazy">
+        </a>
+        <figcaption><h2>軒先の植木鉢</h2><p>少しずつ形の違う鉢が、壁沿いに並ぶ。</p><small>AI生成のサンプル</small></figcaption>
+      </figure>
+      <figure class="journal-photo">
+        <a class="photo-link" href="photos/river.webp" aria-label="川沿いの帰り道を大きく見る">
+          <img src="photos/river.webp" alt="空の下、草の茂った川辺に沿って延びる道" loading="lazy">
+        </a>
+        <figcaption><h2>川沿いの帰り道</h2><p>川べりに出ると、空が急に広くなる。</p><small>AI生成のサンプル</small></figcaption>
+      </figure>
+      <figure class="journal-photo">
+        <a class="photo-link" href="photos/shadows.webp" aria-label="もう一台の自転車を大きく見る">
+          <img src="photos/shadows.webp" alt="日差しを受けた自転車の車輪と、舗装に落ちる影" loading="lazy">
+        </a>
+        <figcaption><h2>もう一台の自転車</h2><p>路面に落ちた影にも、車輪のスポークが一本ずつ見える。</p><small>AI生成のサンプル</small></figcaption>
+      </figure>
+    </div>
+    <a class="back-to-profile" href="../index.html">← プロフィールに戻る</a>
+  </main>
+  <footer>
+    <div class="wrap footer-inner">
+      <b>サンダルの川崎</b>
+      <a href="#top">先頭へ戻る<span class="arrow up" aria-hidden="true"></span></a>
+    </div>
+  </footer>
+  <dialog class="photo-viewer" id="viewer" aria-labelledby="viewer-title">
+    <form method="dialog"><button class="close" aria-label="写真を閉じる" autofocus>×</button></form>
+    <img class="viewer-image" alt="">
+    <div class="viewer-bar">
+      <h2 id="viewer-title" aria-live="polite"></h2>
+      <div class="viewer-controls">
+        <button type="button" class="previous" aria-label="前の写真">←</button>
+        <button type="button" class="next" aria-label="次の写真">→</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

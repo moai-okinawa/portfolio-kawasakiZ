@@ -58,12 +58,18 @@ h1 { margin: 22px 0 26px -.06em; font-size: clamp(54px, 5.6vw, 82px); line-heigh
 }
 .bio { font-size: clamp(14px, 1.12vw, 16px); line-height: 2.1; letter-spacing: .015em; }
 .mobile-break { display: none; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 21px; margin-top: 27px; }
 .hero-button {
-  display: inline-flex; align-items: center; gap: 23px; margin-top: 27px; padding: 13px 19px 13px 21px;
+  display: inline-flex; align-items: center; gap: 23px; padding: 13px 19px 13px 21px;
   background: var(--blue); color: white; border: 1px solid var(--blue); border-radius: 3px;
   font-size: 13px; font-weight: 700; letter-spacing: .06em; transition: background .18s;
 }
 .hero-button:hover { background: #18377d; }
+.journal-link {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--blue);
+  font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px;
+}
+.journal-link:hover { color: var(--ink); }
 .arrow { display: inline-block; position: relative; width: 14px; height: 12px; }
 .arrow::before, .arrow::after { content: ""; display: block; position: absolute; }
 .arrow::before { top: 5px; right: 1px; width: 12px; border-top: 1.5px solid; }
@@ -147,7 +153,7 @@ html:has(dialog[open]) { overflow: hidden; }
   h1 { margin: 17px 0 18px -.055em; font-size: clamp(49px, 10.7vw, 66px); }
   .bio { font-size: 14px; line-height: 2; }
   .wide-break { display: none; }
-  .hero-button { margin-top: 21px; }
+  .hero-actions { margin-top: 21px; }
   .print { width: min(94%, 460px); justify-self: center; }
   .activity-grid { grid-template-columns: none; gap: 0; margin-top: 23px; }
   .activity { align-items: center; gap: 19px; padding: 18px 0; }
@@ -163,8 +169,8 @@ html:has(dialog[open]) { overflow: hidden; }
 }
 @media (max-width: 500px) {
   .masthead-inner { align-items: flex-start; flex-direction: column; }
-  nav { width: 100%; margin-top: 3px; gap: clamp(13px, 5vw, 25px); }
-  nav a { min-height: 38px; font-size: 12px; }
+  .masthead nav { width: 100%; margin-top: 3px; justify-content: space-between; gap: 3px; }
+  .masthead nav a { min-height: 40px; gap: 4px; font-size: 12px; white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
