@@ -4,6 +4,8 @@
 
 [公開サイトを見る](https://moai-okinawa.github.io/portfolio-kawasakiZ/)
 
+色・文字・余白・部品・雰囲気・避ける表現とアクセシビリティの方針は [デザインガイド](DESIGN.md) にまとめています。
+
 ## 写真日記「足跡」に写真を追加する
 
 [GitHubの写真アップロード画面](https://github.com/moai-okinawa/portfolio-kawasakiZ/upload/main/dist/ashiato/photos) で写真ファイルを選び、`main` にコミットします。公開が完了すると、[写真日記「足跡」](https://moai-okinawa.github.io/portfolio-kawasakiZ/ashiato/) のサンプル写真の前に、追加した写真がファイル名順で並びます。
