@@ -1,0 +1,22 @@
+@media (prefers-reduced-motion: no-preference) {
+  .print, .work > .cover, .photo-link {
+    transition: transform 300ms cubic-bezier(.22, 1, .36, 1), box-shadow 300ms ease;
+  }
+
+  .work:focus-within > .cover, .photo-link:focus-visible {
+    transform: translateY(-5px) rotate(-.7deg);
+    box-shadow: 3px 8px 0 #dcd8c970, 4px 12px 20px #202d4214;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .print:hover {
+    transform: translateY(-5px) rotate(.8deg);
+    box-shadow: 3px 7px 0 #dcd8c9, 4px 13px 22px #514a3820;
+  }
+
+  .work:hover > .cover, .photo-link:hover {
+    transform: translateY(-5px) rotate(-.7deg);
+    box-shadow: 3px 8px 0 #dcd8c970, 4px 12px 20px #202d4214;
+  }
+}
