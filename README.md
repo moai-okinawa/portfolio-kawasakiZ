@@ -6,6 +6,10 @@
 
 色・文字・余白・部品・雰囲気・避ける表現とアクセシビリティの方針は [デザインガイド](DESIGN.md) にまとめています。
 
+## Codexで作品を1件追加する
+
+リポジトリ用スキル [add-portfolio-work](.agents/skills/add-portfolio-work/SKILL.md) を使います。`$add-portfolio-work` または「ポートフォリオに作品を1つ追加して」と依頼すると、作品名・説明・URLを確認してから、既存カードと同じ形で追加し、コミット・プッシュ・公開確認まで進めます。
+
 ## 写真日記「足跡」に写真を追加する
 
 [GitHubの写真アップロード画面](https://github.com/moai-okinawa/portfolio-kawasakiZ/upload/main/dist/ashiato/photos) で写真ファイルを選び、`main` にコミットします。公開が完了すると、[写真日記「足跡」](https://moai-okinawa.github.io/portfolio-kawasakiZ/ashiato/) のサンプル写真の前に、追加した写真がファイル名順で並びます。

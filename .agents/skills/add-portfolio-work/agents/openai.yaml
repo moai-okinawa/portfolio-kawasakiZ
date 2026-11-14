@@ -1,0 +1,4 @@
+interface:
+  display_name: "ポートフォリオに作品を追加"
+  short_description: "作品名・説明・URLを聞き、既存デザインで追加してコミット・プッシュ"
+  default_prompt: "$add-portfolio-work を使って、作品名・説明・URLを確認し、作品を1件追加してコミット・プッシュまで行ってください。"
