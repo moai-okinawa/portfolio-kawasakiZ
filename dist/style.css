@@ -94,11 +94,11 @@ h1 { margin: 22px 0 26px -.06em; font-size: clamp(54px, 5.6vw, 82px); line-heigh
 .band { border-block: 1px solid var(--line); background: #f1eee490; }
 .activities .wrap, .works { padding-top: clamp(43px, 4.6vw, 66px); padding-bottom: clamp(43px, 4.6vw, 66px); }
 h2 { margin: 10px 0 0; font-size: clamp(31px, 3vw, 43px); line-height: 1.35; letter-spacing: -.045em; font-weight: 850; }
-.activity-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 31px; }
+.activity-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 32px; margin-top: 31px; }
 .activity { display: flex; align-items: flex-start; gap: clamp(12px, 1.15vw, 18px); padding-inline: clamp(16px, 2vw, 32px); }
-.activity:first-child { padding-left: 0; }
-.activity:last-child { padding-right: 0; }
-.activity + .activity { border-left: 1px solid var(--line); }
+.activity:nth-child(3n + 1) { padding-left: 0; }
+.activity:nth-child(3n) { padding-right: 0; }
+.activity:not(:nth-child(3n + 1)) { border-left: 1px solid var(--line); }
 .activity img { flex: 0 0 auto; width: clamp(42px, 4.2vw, 57px); height: auto; }
 .activity h3 { font-size: clamp(17px, 1.55vw, 21px); line-height: 1.4; letter-spacing: -.035em; }
 .activity p, .summary { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.9; }
