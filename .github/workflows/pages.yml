@@ -31,6 +31,15 @@ jobs:
       - name: Build photo gallery
         run: python3 scripts/build-photo-gallery.py
 
+      - name: Check pages and interactions
+        run: |
+          python3 scripts/check-site.py
+          node --check dist/site.js
+          node --check dist/motion.js
+          node --check dist/ashiato/album.js
+          node scripts/test-motion.cjs
+          node scripts/test-interactions.cjs
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

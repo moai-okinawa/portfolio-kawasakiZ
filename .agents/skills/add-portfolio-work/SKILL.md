@@ -5,7 +5,7 @@ description: サンダルの川崎のポートフォリオに作品を1件追加
 
 # 作品を1件追加する
 
-対象リポジトリは `moai-okinawa/portfolio-kawasakiZ`。このファイルのあるリポジトリのルートを作業場所にする。コンピューターユーズは使わず、ファイル操作・Git・GitHub連携・HTTPで実行する。
+対象リポジトリは `moai-okinawa/portfolio-kawasakiZ`。このファイルのあるリポジトリのルートを作業場所にする。ファイル操作・Git・GitHub連携・HTTPを基本にし、実画面の確認やコンピューターユーズの可否はユーザーの最新指示に従う。
 
 ## 1. 作品の情報を聞く
 
@@ -30,22 +30,29 @@ URLは公開先として意図された `https://` または `http://` の絶対
 現行カードの必要な構造は次の通り。ユーザーの文字列は本文・属性に応じてHTMLエスケープし、HTMLとして直接挿入しない。URLも属性用にエスケープする。
 
 ```html
-<article class="work">
-  <img class="cover" src="assets/作品固有の画像.svg" width="720" height="480" alt="" loading="lazy">
-  <p class="meta"><span lang="en">WORK</span></p>
-  <h3><button type="button" aria-haspopup="dialog">作品名<span class="work-arrow" aria-hidden="true">↗</span></button></h3>
-  <p class="summary">説明の短い要約</p>
-  <template>
-    <p>ユーザーの説明</p>
-    <p class="spec"><a class="journal-link" href="ユーザーのURL">作品を見る<span class="arrow" aria-hidden="true"></span></a></p>
-  </template>
+<article class="work" data-reveal>
+  <figure class="work-media image-frame">
+    <img class="cover" src="assets/作品固有の画像.svg" width="720" height="480" alt="" loading="lazy">
+  </figure>
+  <div class="work-copy">
+    <p class="meta"><span lang="en">WORK</span></p>
+    <h3>作品名</h3>
+    <p class="summary">説明の短い要約</p>
+    <details class="work-details">
+      <summary>作品をひらく <span aria-hidden="true">↗</span></summary>
+      <div class="work-detail-content">
+        <p>ユーザーの説明</p>
+        <p class="spec"><a class="text-link" href="ユーザーのURL">作品を見る <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </details>
+  </div>
 </article>
 ```
 
-- `site.js` は `.cover`・`.meta`・`button`・`template` を読んで詳細を表示する。作品名はbuttonの最初のテキストノードに置き、名前の前に要素や改行を入れない。
-- 作品カード全体にbuttonのクリック領域が重なるため、URLリンクは **template内の詳細** に置く。button内にaを入れない。通常は同じタブで作品URLへ移動する。
+- `site.js` は `.cover`・`.meta`・`h3`・`.work-detail-content` を読み、summaryの操作をモーダルに拡張する。JavaScriptなしではネイティブのdetailsで全文を読める構造を保つ。
+- URLリンクは **`.work-detail-content` 内** に置き、summaryの中にリンクを入れない。通常は同じタブで作品URLへ移動する。`.work:nth-child(even)` による左右の交互配置は共通CSSに任せる。
 - 種別が説明から明確でなければ `WORK` とし、制作年は未提供なら省略する。
-- 画像が提供されていればそれを使う。未提供ならDESIGN.mdの白・黒・グレーを使った簡素な装飾SVGを `dist/assets/` に作り、仮サムネイルとして使用したことを完了時に伝える。既存作品の画像を別作品の実物として流用せず、架空のスクリーンショットを作らない。3:2・720×480を基準に、情報を持つ画像には内容に合うalt、装飾だけなら空altを付ける。
+- 画像が提供されていればそれを使う。未提供ならDESIGN.mdの配色を使った簡素な装飾SVGを `dist/assets/` に作り、仮サムネイルとして使用したことを完了時に伝える。既存作品の画像を別作品の実物として流用せず、架空のスクリーンショットを作らない。3:2・720×480を基準に、情報を持つ画像には内容に合うalt、装飾だけなら空altを付ける。
 - 名前の重複しない画像ファイル名を使う。既存クラスで組み立て、追加だけで済む場合は共通CSS・JavaScriptを変更しない。既存のホバー、繰り返しフェード、キーボード操作を維持する。
 - 既存サンプルの表示は残す。実作品を追加することで「全作品がサンプル」と読める既存の注記・READMEが不正確になる場合は、その文言だけを事実に合わせて調整する。
 
@@ -53,9 +60,9 @@ URLは公開先として意図された `https://` または `http://` の絶対
 
 - 差分で追加が1作品だけであること、作品名・説明・URLが回答と一致すること、既存作品が残っていることを確認する。
 - HTMLを解析して画像ファイルの存在、URLのエスケープ、カードの構造、詳細内リンクの位置を確認する。`&` や引用符を含む入力も壊さない。
-- `git diff --check` を行う。JSを変更した場合は `node --check`、動きに触れた場合は `node scripts/test-motion.cjs` を実行する。不要なテストや新しい依存関係は増やさない。
+- `python3 scripts/check-site.py` と `git diff --check` を行う。JSを変更した場合は `node --check` と `node scripts/test-interactions.cjs`、動きに触れた場合は `node scripts/test-motion.cjs` を実行する。不要なテストや新しい依存関係は増やさない。
 - URLは必要に応じてHTTPで確認する。ログインや403等で確認できない場合、利用可能だと断言せず、その制限を伝える。
-- ブラウザー操作はしない。コードの確認と実画面の確認を混同しない。
+- ユーザーが許可した実画面検証は必要な範囲で行う。コードの確認と実画面の確認を混同せず、実行できなかった確認は明記する。
 
 ## 5. コミット・プッシュ・公開確認
 
@@ -63,7 +70,7 @@ URLは公開先として意図された `https://` または `http://` の絶対
 
 1. 対象差分だけをステージし、`作品「作品名」を追加` など内容の分かるメッセージでコミットする。ユーザー指定のメッセージがあれば優先する。
 2. 利用可能なGitHub連携を優先し、または認証済みGitで `main` にプッシュする。連携では画像・HTMLを1つのtree/commitにまとめ、現在のmainを親にして、期待するheadを指定した非強制のref更新を行う。反映後はローカルも同期する。
-3. リモートが進んでいたら最新差分を確認し、自分の追加を載せ直す。force push、履歴の削除、他人の変更の巻き戻しはしない。競合が解決できない場合や認証・権限で拒否された場合は、同じ操作を繰り返さず、準備済みの差分と必要な対応を伝える。認証回避にコンピューターユーズを使わない。
+3. リモートが進んでいたら最新差分を確認し、自分の追加を載せ直す。force push、履歴の削除、他人の変更の巻き戻しはしない。競合が解決できない場合や認証・権限で拒否された場合は、同じ操作を繰り返さず、準備済みの差分と必要な対応を伝える。
 4. 対象コミットのGitHub Actionsが成功するまでAPIで確認し、公開トップページのHTMLに作品名とURLが含まれ、画像がHTTPで取得できることを確認する。失敗時はログを確認し、今回の追加に起因する問題なら修正する。プッシュ成功だけを公開完了と報告しない。
 
 完了時は作品名、[公開ページ](https://moai-okinawa.github.io/portfolio-kawasakiZ/#works)、コミット、検証結果を短く伝える。仮サムネイルや未確認事項があれば併記する。

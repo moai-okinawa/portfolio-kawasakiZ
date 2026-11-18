@@ -32,6 +32,11 @@ class Classes extends Set {
   }
 }
 
+class Styles extends Map {
+  setProperty(name, value) { this.set(name, value); }
+  removeProperty(name) { this.delete(name); }
+}
+
 function makeElement(top, height = 200) {
   return {
     top,
@@ -40,6 +45,10 @@ function makeElement(top, height = 200) {
     offset: 0,
     reads: 0,
     dataset: {},
+    style: new Styles(),
+    attributes: {},
+    setAttribute(name, value) { this.attributes[name] = value; },
+    querySelectorAll() { return []; },
     classList: new Classes(),
     contains(target) {
       return target === this || target?.parent === this;
@@ -59,6 +68,11 @@ function setup(elements, options = {}) {
   const window = new Events();
   const document = new Events();
   const preference = new Events();
+  const desktop = new Events();
+  desktop.matches = options.desktop ?? true;
+  const parallax = options.parallax ?? [];
+  const routes = options.routes ?? [];
+  const progress = options.progress ? makeElement(0, 2) : null;
   const frames = new Map();
   const observers = [];
   const fontCallbacks = [];
@@ -66,16 +80,20 @@ function setup(elements, options = {}) {
 
   preference.matches = options.reduced ?? false;
   window.innerHeight = 800;
+  window.scrollY = 0;
   window.CSS = { supports: () => options.translateSupported !== false };
-  window.matchMedia = () => preference;
+  window.matchMedia = query => query.includes("prefers-reduced-motion") ? preference : desktop;
   if (options.missingCSS) delete window.CSS;
   if (options.missingMatchMedia) delete window.matchMedia;
 
   document.body = {};
   document.activeElement = document.body;
   document.hidden = false;
-  document.documentElement = { classList: new Classes(), offsetWidth: 1000 };
-  document.querySelectorAll = () => elements;
+  document.documentElement = { classList: new Classes(), offsetWidth: 1000, scrollHeight: 4000 };
+  document.querySelectorAll = selector => ({
+    "[data-reveal]": elements, "[data-parallax]": parallax, ".journey-route": routes,
+  }[selector] ?? []);
+  document.querySelector = selector => selector === ".reading-progress" ? progress : null;
   document.fonts = { ready: { then: (callback) => fontCallbacks.push(callback) } };
 
   class ResizeObserver {
@@ -107,6 +125,8 @@ function setup(elements, options = {}) {
     window,
     document,
     preference,
+    desktop,
+    progress,
     frames,
     observers,
     flush() {
@@ -123,6 +143,11 @@ function setup(elements, options = {}) {
     setReduced(reduced) {
       preference.matches = reduced;
       preference.emit("change");
+    },
+    setDesktop(enabled) {
+      desktop.matches = enabled;
+      desktop.emit("change");
+      this.flush();
     },
     resolveFonts() {
       for (const callback of fontCallbacks) callback();
@@ -386,9 +411,119 @@ test("CSS preserves hover feedback and reveals all content for reduced motion an
   assert.match(motion.body, /\.scroll-reveal:focus-within\s*\{[^}]*opacity:\s*1\s*;[^}]*pointer-events:\s*auto\s*;/);
   assert.match(hover.query, /prefers-reduced-motion:\s*no-preference/);
   assert.match(hover.query, /pointer:\s*fine/);
-  assert.match(hover.body, /\.print:hover\s*\{[^}]*transform:[^;]*rotate\(/);
-  assert.match(hover.body, /\.work:hover > \.cover,\s*\.photo-link:hover\s*\{[^}]*transform:/);
+  assert.match(hover.body, /\.photo-link:hover img:not\(\.island-rotated\)/);
+  assert.match(hover.body, /transform:\s*scale\(1\.025\)/);
+  const reduced = blocks.find(({ query }) => query === "(prefers-reduced-motion: reduce)");
+  assert.match(reduced.body, /animation:\s*none\s*!important/);
+  assert.match(reduced.body, /translate:\s*none\s*!important/);
+  assert.match(reduced.body, /stroke-dasharray:\s*none\s*!important/);
   assert.match(print.body, /opacity:\s*1\s*!important/);
   assert.match(print.body, /translate:\s*none\s*!important/);
   assert.match(print.body, /transition:\s*none\s*!important/);
+});
+
+
+test("initialization never hides content before its first successful measurement", () => {
+  const item = makeElement(900);
+  const app = setup([item]);
+  assert.equal(item.dataset.scrollState, undefined);
+  app.flush();
+  assert.equal(item.dataset.scrollState, "below");
+});
+
+test("desktop parallax is bounded, touch layouts stay still, and queued work stops", () => {
+  const photo = makeElement(-450, 1200);
+  const app = setup([], { parallax: [photo] });
+  app.flush();
+  assert.equal(photo.style.get("--parallax-y"), "15.00px");
+  photo.top = -1000;
+  app.window.emit("scroll");
+  app.flush();
+  assert.equal(photo.style.get("--parallax-y"), "24.00px");
+  app.setDesktop(false);
+  assert.equal(photo.style.get("--parallax-y"), "0.00px");
+  app.setDesktop(true);
+  assert.equal(photo.style.get("--parallax-y"), "24.00px");
+  app.window.emit("scroll");
+  app.setReduced(true);
+  assert.equal(photo.style.has("--parallax-y"), false);
+  assert.equal(app.frames.size, 0);
+  app.window.emit("scroll");
+  assert.equal(app.frames.size, 0);
+});
+
+test("parallax is not measured on touch devices or animated outside the viewport", () => {
+  const photo = makeElement(100, 900);
+  const app = setup([], { parallax: [photo], desktop: false });
+  app.flush();
+  assert.equal(photo.reads, 0);
+  assert.equal(photo.style.has("--parallax-y"), false);
+  app.setDesktop(true);
+  const current = photo.style.get("--parallax-y");
+  photo.top = 1600;
+  app.window.emit("scroll");
+  app.flush();
+  assert.equal(photo.style.get("--parallax-y"), current);
+  assert.equal(app.frames.size, 0, "no self-scheduling animation loop");
+});
+
+test("reading progress clamps document edges, handles a short page, and clears for static mode", () => {
+  const app = setup([], { progress: true });
+  app.flush();
+  assert.equal(app.progress.style.get("--reading-progress"), "0.0000");
+  app.window.scrollY = 1600;
+  app.window.emit("scroll");
+  app.flush();
+  assert.equal(app.progress.style.get("--reading-progress"), "0.5000");
+  app.window.scrollY = 8000;
+  app.window.emit("scroll");
+  app.flush();
+  assert.equal(app.progress.style.get("--reading-progress"), "1.0000");
+  app.window.scrollY = -50;
+  app.window.emit("scroll");
+  app.flush();
+  assert.equal(app.progress.style.get("--reading-progress"), "0.0000");
+  app.document.documentElement.scrollHeight = 600;
+  app.window.emit("resize");
+  app.flush();
+  assert.equal(app.progress.style.get("--reading-progress"), "0.0000");
+  app.setReduced(true);
+  assert.equal(app.progress.style.has("--reading-progress"), false);
+});
+
+test("route footprints reveal in order, reverse with scroll, and remain visible without motion", () => {
+  const route = makeElement(900, 400);
+  const line = makeElement(0);
+  const steps = Array.from({ length: 4 }, () => makeElement(0));
+  route.querySelectorAll = selector => selector === ".route-line" ? [line] : steps;
+  const app = setup([route], { routes: [route] });
+  app.flush();
+  assert.equal(line.attributes.pathLength, "1");
+  assert.ok(steps.every(step => step.dataset.stepVisible === "false"));
+  app.scrollTo(route, 320);
+  assert.equal(route.style.get("--route-progress"), "0.5333");
+  assert.deepEqual(steps.map(step => step.dataset.stepVisible), ["true", "true", "false", "false"]);
+  app.scrollTo(route, -100);
+  assert.ok(steps.every(step => step.dataset.stepVisible === "true"));
+  app.scrollTo(route, 900);
+  assert.ok(steps.every(step => step.dataset.stepVisible === "false"));
+  app.setReduced(true);
+  assert.ok(steps.every(step => step.dataset.stepVisible === undefined));
+  assert.equal(route.style.has("--route-progress"), false);
+  assert.equal(app.document.documentElement.classList.has("motion-enhanced"), false);
+});
+
+test("background tabs do not schedule frames and no scene requires perpetual work", () => {
+  const item = makeElement(200);
+  const app = setup([item], { progress: true });
+  app.flush();
+  assert.equal(app.frames.size, 0);
+  app.document.hidden = true;
+  for (let i = 0; i < 30; i++) app.window.emit("scroll");
+  assert.equal(app.frames.size, 0);
+  app.document.hidden = false;
+  app.document.emit("visibilitychange");
+  assert.equal(app.frames.size, 1);
+  app.flush();
+  assert.equal(app.frames.size, 0);
 });

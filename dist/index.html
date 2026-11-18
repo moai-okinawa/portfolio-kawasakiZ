@@ -3,122 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="サンダルの川崎の自己紹介ページ。町歩き、編集、録音から生まれた地図や小冊子、ラジオを紹介します。">
-  <title>サンダルの川崎｜プロフィールと作ったもの</title>
+  <meta name="theme-color" content="#091b22">
+  <meta name="description" content="写真を撮る。全国各地を周る。サンダルの川崎が、旅と日々の寄り道を残す冒険記録。写真日記「足跡」と、寄り道から生まれる制作例。">
+  <title>サンダルの川崎｜まだ見ぬ景色へ、サンダルで。</title>
+  <link rel="icon" href="assets/mark.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;display=swap" referrerpolicy="no-referrer">
-  <link rel="icon" href="assets/mark.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=3">
-  <link rel="stylesheet" href="motion.css?v=3">
-  <script defer src="site.js"></script>
-  <script defer src="motion.js?v=2"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+
+  <link rel="stylesheet" href="motion.css?v=4">
+  <script defer src="site.js?v=4"></script>
+
+  <script defer src="motion.js?v=4"></script>
 </head>
-<body>
+<body class="home-page">
   <a class="skip" href="#main">本文へ移動</a>
+  <div class="reading-progress" aria-hidden="true"></div>
   <header class="masthead" id="top">
     <div class="wrap masthead-inner">
-      <a class="brand" href="#top">
-        <img src="assets/mark.png" width="41" height="41" alt="">
-        <span>サンダルの川崎</span>
-      </a>
-      <nav aria-label="サイトメニュー">
-        <a href="#profile" aria-current="location">自己紹介</a>
-        <a href="#activities">やっていること</a>
+      <a class="brand" href="#top"><img src="assets/mark.png" width="40" height="40" alt=""><span>サンダルの川崎<small>A LIFE IN SANDALS</small></span></a>
+      <button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" hidden>メニュー <span aria-hidden="true">＋</span></button>
+      <nav id="site-menu" aria-label="サイトメニュー">
+        <a href="#profile">川崎について</a>
+        <a href="#activities">旅と日々</a>
         <a href="#works">作ったもの</a>
-        <a href="ashiato/index.html">足跡</a>
+        <a class="nav-journal" href="ashiato/index.html" >足跡 <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
   </header>
   <main id="main">
-    <section class="wrap hero" id="profile" aria-labelledby="profile-title">
-      <div class="intro">
-        <p class="kicker"><span lang="en">PROFILE</span></p>
-        <h1 id="profile-title">サンダルの<br><span class="underprint">川崎</span>です<span class="period">。</span></h1>
-        <p class="bio">こんにちは、川崎です。ふだんの履き物はサンダル。<br class="wide-break">町を歩いて見つけたものを、<br class="mobile-break">小冊子や地図、音にしています。</p>
-        <div class="hero-actions">
-          <a class="hero-button" href="#works">作ったものを見る<span class="arrow diagonal" aria-hidden="true"></span></a>
-          <a class="journal-link" href="ashiato/index.html">写真日記「足跡」<span class="arrow" aria-hidden="true"></span></a>
-        </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-landscape" data-parallax><div class="island-frame"><img class="island-rotated" src="ashiato/photos/%E6%9C%AC%E5%B3%B6%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%88%E3%82%8B%E4%BC%8A%E6%B1%9F%E5%B3%B6.webp" width="1920" height="1440" alt="沖縄本島の海岸から、青い海の向こうに伊江島を望む" fetchpriority="high"></div></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <p class="hero-overline" data-hero-enter><span class="small-star" aria-hidden="true">✳</span> WANDER. NOTICE. REMEMBER.</p>
+        <h1 id="hero-title" data-hero-enter style="--enter-delay: .12s">まだ見ぬ<br>景色へ。<em>サンダルで。</em></h1>
+        <div class="hero-bottom" data-hero-enter style="--enter-delay: .24s"><div><p>写真を撮る。全国各地を周る。<br>足が向くほうへ、好奇心が続くほうへ。</p><a class="action-link light" href="ashiato/index.html">足跡をたどる <span aria-hidden="true">↗</span></a></div><div class="hero-location"><span class="location-dot" aria-hidden="true"></span><span>OKINAWA, JAPAN<small>本島から見える伊江島</small></span></div></div>
+        <div class="hero-baseline"><a href="#profile">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span>A JOURNAL BY KAWASAKI</span></div>
       </div>
-      <figure class="print">
-        <img class="hero-art" src="assets/sandal-print.webp" width="800" height="600" alt="青い地に朱色の鼻緒が映える、一足のサンダルの版画風イラスト">
-        <figcaption><span class="figure-no" lang="en">FIG. 01</span><span>いつもの相棒</span></figcaption>
-      </figure>
+      <span class="hero-side-note" aria-hidden="true">EVERY DETOUR HAS A STORY.</span>
     </section>
-    <section class="activities band" id="activities" aria-labelledby="activities-title">
-      <div class="wrap">
-        <p class="kicker" lang="en">ACTIVITIES</p>
-        <h2 id="activities-title">やっていること</h2>
-        <div class="activity-grid">
-          <article class="activity">
-            <img width="56" height="56" src="assets/icon-walk.png" alt="">
-            <div><h3>町を歩く</h3><p>路地や商店街をぶらぶら。気になる看板や建物を手帳に描きとめます。</p></div>
-          </article>
-          <article class="activity">
-            <img width="56" height="56" src="assets/icon-edit.png" alt="">
-            <div><h3>紙にまとめる</h3><p>散歩のメモに絵と言葉を添えて、ポケットに入る冊子や地図を作ります。</p></div>
-          </article>
-          <article class="activity">
-            <img width="56" height="56" src="assets/icon-record.png" alt="">
-            <div><h3>音を集める</h3><p>踏切の音、店先のおしゃべり。歩いて出会った町の音を録音しています。</p></div>
-          </article>
-          <article class="activity">
-            <img width="56" height="56" src="assets/icon-photo.svg" alt="">
-            <div><h3>写真を撮る</h3><p>旅先や日々の散歩で出会った風景を撮影し、写真日記「足跡」に残しています。</p></div>
-          </article>
-          <article class="activity">
-            <img width="56" height="56" src="assets/icon-travel.svg" alt="">
-            <div><h3>全国各地を周る</h3><p>全国各地を周り、その土地の風景や町並みに触れています。</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <section class="wrap works" id="works" aria-labelledby="works-title">
-      <p class="kicker" lang="en">WORKS</p>
-      <h2 id="works-title">作ったもの</h2>
-      <div class="work-grid">
-        <article class="work">
-          <img class="cover" src="assets/work-zine.webp" width="720" height="480" alt="黄色い背景に並んだ、青いサンダルが表紙の小冊子" loading="lazy">
-          <p class="meta"><span lang="en">ZINE</span><span aria-hidden="true">/</span>2026</p>
-          <h3><button type="button" aria-haspopup="dialog">寄り道手帖<span class="work-arrow" aria-hidden="true">↗</span></button></h3>
-          <p class="summary">歩く途中で見つけた、町の小さなものを集めた冊子。</p>
-          <template><p>散歩の帰りに手帳を開くと、いつも似たようなものを描いていました。角の欠けたタイル、日よけの縞模様、植木鉢の行列。そんな寄り道のスケッチを、一冊に綴じました。</p><p class="spec">文・絵・製本　川崎<br>文庫サイズ ／ 16ページ</p></template>
-        </article>
-        <article class="work">
-          <img class="cover" src="assets/work-map.webp" width="720" height="480" alt="青い街区の上を赤い散歩道が通る折りたたみ地図" loading="lazy">
-          <p class="meta"><span lang="en">MAP</span><span aria-hidden="true">/</span>2025</p>
-          <h3><button type="button" aria-haspopup="dialog">サンダル散歩マップ<span class="work-arrow" aria-hidden="true">↗</span></button></h3>
-          <p class="summary">商店街から川べりまで、寄り道しながら歩くための地図。</p>
-          <template><p>何度も歩いた界隈を、サンダルでひと回りできる散歩地図にしました。パン屋の軒先を曲がったら、次の角でちょっとひと休み。自分の好きな目印だけを描き込んでいます。</p><p class="spec">作図・編集　川崎<br>A4三つ折り ／ 両面印刷</p></template>
-        </article>
-        <article class="work">
-          <img class="cover" src="assets/work-radio.webp" width="720" height="480" alt="淡い朱色の背景に置かれたオレンジのカセットテープ" loading="lazy">
-          <p class="meta"><span lang="en">AUDIO</span><span aria-hidden="true">/</span>2025</p>
-          <h3><button type="button" aria-haspopup="dialog">路地裏ラジオ<span class="work-arrow" aria-hidden="true">↗</span></button></h3>
-          <p class="summary">路地で録った音と散歩の話をつないだ、短い音声作品。</p>
-          <template><p>夕方の路地で録った足音や風鈴の音に、その日あったことを重ねて編集しました。第1回の舞台は雨上がりの商店街。シャッターが開く音から始まり、川べりの鳥の声で終わります。</p><p class="spec">録音・構成　川崎<br>第1回「雨上がりの商店街」 ／ 6分</p></template>
-        </article>
-      </div>
-    </section>
+    <section class="profile-section light-section" id="profile" aria-labelledby="profile-title"><div class="wrap">
+      <div class="section-heading" data-reveal><p class="eyebrow">01 — THE TRAVELER</p><span class="section-note">旅する人のこと</span></div>
+      <div class="profile-grid"><div class="profile-title" data-reveal><h2 id="profile-title">予定にない道に、<br>心が動く。</h2><p class="serif-english">Take the long way.</p><figure class="companion-art"><img src="assets/sandal-print.webp" width="800" height="600" alt="青い地に朱色の鼻緒が映える、一足のサンダルの版画風イラスト" loading="lazy"><figcaption><span>MY EVERYDAY COMPANION</span>いつもの相棒。</figcaption></figure></div><div class="profile-story" data-reveal><span class="intro-name">サンダルの川崎</span><p class="lead">遠くの絶景も、<br>いつもの町の路地裏も。</p><p>こんにちは、川崎です。ふだんの履き物はサンダル。<br>写真を撮りながら、全国各地を周っています。</p><p>目的地に着くことだけが、旅じゃない。<br>ふと立ち止まった場所や、なんとなく曲がった角に、忘れたくない景色がある。</p><p>そんな寄り道を、写真や言葉で残していく。<br>ここは、その小さな冒険の記録です。</p><a class="text-link" href="ashiato/index.html">写真日記「足跡」をひらく <span aria-hidden="true">↗</span></a></div></div>
+    </div></section>
+    <section class="activities-section" id="activities" aria-labelledby="activities-title"><div class="wrap">
+      <div class="section-heading" data-reveal><p class="eyebrow">02 — THE WAY I WANDER</p><span class="section-note">旅と日々</span></div>
+      <div class="activities-layout"><div><h2 id="activities-title" data-reveal>歩いて、見つけて。<br>心に残ったものを。</h2><div class="activity-list"><article class="activity" data-reveal><span class="activity-number">01</span><div><h3>写真を撮る</h3><p>旅先や日々の散歩で出会った風景を、一枚に。<br>目の前の景色と、そのときの気持ちを「足跡」に残します。</p><a class="text-link" href="ashiato/index.html">写真を見る <span aria-hidden="true">↗</span></a></div></article><article class="activity" data-reveal><span class="activity-number">02</span><div><h3>全国各地を周る</h3><p>その土地の風景や町並みに触れながら、日本のあちこちへ。行ったことのない場所にも、もう一度歩きたい道にも。</p></div></article></div></div><div class="journey-route" data-reveal aria-hidden="true"><svg viewBox="0 0 400 560" fill="none"><path class="route-guide" d="M52 64C15 170 156 209 232 230S361 321 295 408S355 493 329 510"/><path class="route-line" d="M52 64C15 170 156 209 232 230S361 321 295 408S355 493 329 510"/><g class="route-step" transform="translate(67 111) rotate(-30) scale(0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(100 159) rotate(5) scale(-0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(157 199) rotate(60) scale(0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(232 226) rotate(75) scale(-0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(294 277) rotate(15) scale(0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(314 350) rotate(0) scale(-0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(279 411) rotate(-40) scale(0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><g class="route-step" transform="translate(301 469) rotate(30) scale(-0.52 .52)"><path fill="currentColor" d="M-6 13C-9 6-11-2-10-10C-9-19-3-23 4-21C11-19 12-10 9-3C7 3 6 8 6 14C6 21-3 23-6 17Z"/><path class="sandal-strap" d="M-8 2Q-5-8 1-13Q7-8 8 2"/></g><circle cx="52" cy="64" r="5"/><circle cx="329" cy="510" r="5"/><path d="M44 64h16M52 56v16M321 510h16M329 502v16"/></svg><span class="route-label route-label-start">THE FIRST STEP</span><span class="route-label route-label-end">TO THE UNKNOWN</span><span class="route-word">Keep<br>wandering.</span></div></div>
+      <div class="idea-notes" data-reveal><div><p class="eyebrow">IDEAS ALONG THE WAY</p><h3>寄り道から、広がること。</h3><small>ここからは、制作例につながる活動の構想です。</small></div><ol><li><span>01</span><div><h4>町を歩く</h4><p>路地や商店街で見つけた、気になる看板や建物を手帳に。</p></div></li><li><span>02</span><div><h4>紙にまとめる</h4><p>散歩のメモに絵と言葉を添えて、小冊子や地図に。</p></div></li><li><span>03</span><div><h4>音を集める</h4><p>足音、風、店先の声。町の気配を、音の記録に。</p></div></li></ol></div>
+    </div></section>
+    <section class="field-section light-section" aria-labelledby="field-title"><div class="wrap field-grid"><figure class="field-image" data-reveal><a class="island-frame" href="ashiato/index.html#collection" aria-label="写真日記で本島から見える伊江島を見る"><img class="island-rotated" src="ashiato/photos/%E6%9C%AC%E5%B3%B6%E3%81%8B%E3%82%89%E8%A6%8B%E3%81%88%E3%82%8B%E4%BC%8A%E6%B1%9F%E5%B3%B6.webp" width="1920" height="1440" alt="沖縄本島の海岸から望む伊江島。青い海と空、手前の消波ブロック" loading="lazy"></a><figcaption><span>FIELD NOTE / 001</span><span>OKINAWA, JAPAN</span></figcaption></figure><div class="field-copy" data-reveal><p class="eyebrow">A MOMENT TO REMEMBER</p><h2 id="field-title">海の向こうに、<br>まだ続きがある。</h2><p class="field-photo-title">本島から見える伊江島</p><p>水平線を眺めていると、<br>次はあの向こうへ、と思う。<br>一枚の写真が、次の旅の入口になる。</p><a class="action-link dark" href="ashiato/index.html">写真日記「足跡」へ <span aria-hidden="true">↗</span></a><span class="field-english" aria-hidden="true">Beyond<br>the horizon.</span></div></div></section>
+    <section class="works-section" id="works" aria-labelledby="works-title"><div class="wrap"><div class="section-heading" data-reveal><p class="eyebrow">03 — THINGS I MAKE</p><span class="section-note">作ったもの</span></div><div class="works-intro" data-reveal><h2 id="works-title">寄り道が、<br>かたちになる。</h2><p>見つけた景色を、手に取れるものへ。<br>冊子、地図、音で表す、3つの制作例。<small>以下の作品・制作年・仕様はサンプルです。</small></p></div><div class="work-grid"><article class="work" data-reveal>
+  <figure class="work-media image-frame"><img class="cover" src="assets/work-zine.webp" width="720" height="480" alt="黄色い背景に並んだ、青いサンダルが表紙の小冊子" loading="lazy"><figcaption>01 / SAMPLE WORK</figcaption></figure>
+  <div class="work-copy"><p class="meta"><span lang="en">ZINE</span><span aria-hidden="true">/</span>2026<span class="sample-badge">制作例</span></p><h3>寄り道手帖</h3><p class="summary">歩く途中で見つけた、町の小さなものを集めた冊子。</p><details class="work-details"><summary>作品をひらく <span aria-hidden="true">↗</span></summary><div class="work-detail-content"><p>散歩の帰りに手帳を開くと、いつも似たようなものを描いていました。角の欠けたタイル、日よけの縞模様、植木鉢の行列。そんな寄り道のスケッチを、一冊に綴じました。</p><p class="spec">文・絵・製本　川崎<br>文庫サイズ ／ 16ページ</p><p class="sample-note">この作品はポートフォリオのサンプルです。</p></div></details></div>
+</article>
+<article class="work" data-reveal>
+  <figure class="work-media image-frame"><img class="cover" src="assets/work-map.webp" width="720" height="480" alt="青い街区の上を赤い散歩道が通る折りたたみ地図" loading="lazy"><figcaption>02 / SAMPLE WORK</figcaption></figure>
+  <div class="work-copy"><p class="meta"><span lang="en">MAP</span><span aria-hidden="true">/</span>2025<span class="sample-badge">制作例</span></p><h3>サンダル散歩マップ</h3><p class="summary">商店街から川べりまで、寄り道しながら歩くための地図。</p><details class="work-details"><summary>作品をひらく <span aria-hidden="true">↗</span></summary><div class="work-detail-content"><p>何度も歩いた界隈を、サンダルでひと回りできる散歩地図にしました。パン屋の軒先を曲がったら、次の角でちょっとひと休み。自分の好きな目印だけを描き込んでいます。</p><p class="spec">作図・編集　川崎<br>A4三つ折り ／ 両面印刷</p><p class="sample-note">この作品はポートフォリオのサンプルです。</p></div></details></div>
+</article>
+<article class="work" data-reveal>
+  <figure class="work-media image-frame"><img class="cover" src="assets/work-radio.webp" width="720" height="480" alt="淡い朱色の背景に置かれたオレンジのカセットテープ" loading="lazy"><figcaption>03 / SAMPLE WORK</figcaption></figure>
+  <div class="work-copy"><p class="meta"><span lang="en">AUDIO</span><span aria-hidden="true">/</span>2025<span class="sample-badge">制作例</span></p><h3>路地裏ラジオ</h3><p class="summary">路地で録った音と散歩の話をつないだ、短い音声作品。</p><details class="work-details"><summary>作品をひらく <span aria-hidden="true">↗</span></summary><div class="work-detail-content"><p>夕方の路地で録った足音や風鈴の音に、その日あったことを重ねて編集しました。第1回の舞台は雨上がりの商店街。シャッターが開く音から始まり、川べりの鳥の声で終わります。</p><p class="spec">録音・構成　川崎<br>第1回「雨上がりの商店街」 ／ 6分</p><p class="sample-note">この作品はポートフォリオのサンプルです。</p></div></details></div>
+</article></div></div></section>
+    <section class="departure-cta light-section"><div class="wrap" data-reveal><p class="eyebrow">THE JOURNEY CONTINUES</p><h2>次の足跡は、<br>これから。</h2><div class="cta-bottom"><p>旅のつづきを、写真で。</p><a class="large-link" href="ashiato/index.html">足跡をたどる <span aria-hidden="true">↗</span></a></div><span class="cta-word" aria-hidden="true">Wander on.</span></div></section>
   </main>
-  <footer>
-    <div class="wrap footer-inner">
-      <div><b>サンダルの川崎</b><small>プロフィール・制作例はサンプルです。</small></div>
-      <a href="#top">先頭へ戻る<span class="arrow up" aria-hidden="true"></span></a>
-    </div>
-  </footer>
-  <dialog id="work-dialog" aria-labelledby="dialog-title">
-    <div class="dialog-body">
-      <form method="dialog"><button class="close" aria-label="作品詳細を閉じる" autofocus>×</button></form>
-      <img id="dialog-image" class="cover" alt="">
-      <div class="dialog-copy">
-        <p id="dialog-meta" class="meta"></p>
-        <h2 id="dialog-title"></h2>
-        <div id="dialog-description"></div>
-      </div>
-    </div>
-  </dialog>
+  <footer class="site-footer"><div class="wrap footer-main"><a class="footer-brand" href="#top">サンダルの川崎<small>A LIFE IN SANDALS.</small></a><p>どこかへ行く。何かを見つける。<br>その繰り返しを、ここに。</p><a class="to-top" href="#top" aria-label="ページの先頭へ戻る">↑</a></div><div class="wrap footer-bottom"><span>WANDER. NOTICE. REMEMBER.</span><small>プロフィールの紹介文・制作例にはサンプルを含みます。</small></div></footer>
+  <dialog id="work-dialog" aria-labelledby="dialog-title"><div class="dialog-body"><form method="dialog"><button class="close" aria-label="作品詳細を閉じる" autofocus>×</button></form><img id="dialog-image" class="cover" alt=""><div class="dialog-copy"><p id="dialog-meta" class="meta"></p><h2 id="dialog-title"></h2><div id="dialog-description"></div></div></div></dialog>
 </body>
 </html>
